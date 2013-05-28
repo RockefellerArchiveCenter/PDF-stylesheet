@@ -2533,7 +2533,7 @@
                                             or ead:processinfo or ead:relatedmaterial or ead:separatedmaterial">
                                             <fo:table-row>
                                                 <fo:table-cell number-columns-spanned="2"  margin-left=".4in">
-                                                    <fo:block font-weight="bold" text-decoration="underline" margin-top="4pt">Details</fo:block>
+                                                    <fo:block font-weight="bold" text-decoration="underline" margin-top="4pt"><!--Details--></fo:block>
                                                     <xsl:apply-templates select="ead:scopecontent"/>
                                                     <xsl:apply-templates select="ead:accruals"/>
                                                     <xsl:apply-templates select="ead:appraisal"/>
@@ -2702,16 +2702,20 @@
         <xsl:choose>
             <!--This code processes the elements when unitdate is a child of unittitle.-->
             <xsl:when test="ead:unittitle/ead:unitdate">
+                <fo:block font-weight="bold">
                 <xsl:apply-templates select="ead:unittitle"/>
+                </fo:block>
             </xsl:when>
             <!--This code process the elements when unitdate is not a child of untititle-->
             <xsl:otherwise>
+                <fo:block font-weight="bold">
                 <xsl:apply-templates select="ead:unittitle"/>
                 <xsl:if test="ead:unitdate and ead:unittitle and string-length(ead:unittitle) &gt; 1">, </xsl:if>
                 <xsl:for-each select="ead:unitdate[not(self::ead:unitdate[@type='bulk'])]">
                     <xsl:apply-templates/>
                     <xsl:text>&#160;</xsl:text>
                 </xsl:for-each>
+                </fo:block>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="ead:physdesc/ead:extent">
