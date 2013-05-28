@@ -11,8 +11,9 @@
         *                   wsalesky@gmail.com                            *
         *                                                                 *
         * REVISED          January 15, 2011 WS                            *
-        * ADAPTED          September 26, 2011 WS                          *
-        *                  Adapted for Rockefeller Archive Center         *  
+        *                  September 26, 2011 WS                          *
+        *                  May 28, 2013 HA                                *
+        * ADAPTED          Adapted for Rockefeller Archive Center         *  
         *                                                                 *
         * ABOUT:           This file has been created for use with        *
         *                  the Archivists' Toolkit  July 30 2008.         *
@@ -2401,16 +2402,17 @@
                                                 <fo:table-column column-number="1" column-width="3.25in"/>
                                                 <fo:table-column column-number="2" column-width="3in"/>
                                                 <fo:table-body>
-                                                    <xsl:if test="ead:did/ead:container or ead:dao">
+                                                    <!-- 5/28/2013 HA removed Instances header -->
+                                                    <!--<xsl:if test="ead:did/ead:container or ead:dao">
                                                         <fo:table-row>
                                                             <fo:table-cell number-columns-spanned="2">
                                                                 <fo:block font-weight="bold" text-decoration="underline" space-after="4pt"> Instances </fo:block>
                                                             </fo:table-cell>
                                                         </fo:table-row>
-                                                    </xsl:if>
+                                                    </xsl:if> -->
                                                     <xsl:for-each select="ead:did/ead:container[@id]">
                                                         <xsl:variable name="id" select="@id"/>
-                                                        <fo:table-row>
+                                                        <fo:table-row space-after="2pt">
                                                             <fo:table-cell>
                                                                 <fo:block>
                                                                     <xsl:value-of select="@label"/>
@@ -2473,17 +2475,18 @@
                                     <fo:table-column column-number="1" column-width="3.25in"/>
                                     <fo:table-column column-number="2" column-width="3in"/>
                                     <fo:table-body>
-                                        <xsl:if test="ead:did/ead:container or ead:dao">
+                                        <!-- 5/28/2013 HA removed Instances header -->
+                                        <!--<xsl:if test="ead:did/ead:container or ead:dao">
                                             <fo:table-row>
                                                 <fo:table-cell number-columns-spanned="2"  margin-left=".4in">
                                                   <fo:block font-weight="bold" text-decoration="underline" margin-top="4pt">Instances</fo:block>
                                                 </fo:table-cell>
                                             </fo:table-row>
-                                        </xsl:if>
+                                        </xsl:if> -->
                                         <xsl:for-each select="ead:did/ead:container[@id]">
                                             <xsl:sort select="@label"/>
                                             <xsl:variable name="id" select="@id"/>
-                                            <fo:table-row>
+                                            <fo:table-row margin-top="2pt">
                                                 <fo:table-cell margin-left=".4in">
                                                   <fo:block>
                                                   <xsl:value-of select="@label"/>
