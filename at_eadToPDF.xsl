@@ -2266,30 +2266,30 @@
         <xsl:param name="level" />
         <xsl:variable name="clevelMargin">
             <xsl:choose>
-                <xsl:when test="$level = 01">0in</xsl:when>
-                <xsl:when test="$level = 02">.4in</xsl:when>
-                <xsl:when test="$level = 03">.8in</xsl:when>
-                <xsl:when test="$level = 04">1.2in</xsl:when>
-                <xsl:when test="$level = 05">1.6in</xsl:when>
-                <xsl:when test="$level = 06">2in</xsl:when>
-                <xsl:when test="$level = 07">2.4in</xsl:when>
-                <xsl:when test="$level = 08">2.8in</xsl:when>
-                <xsl:when test="$level = 09">3.2in</xsl:when>
-                <xsl:when test="$level = 10">3.6in</xsl:when>
-                <xsl:when test="$level = 11">4in</xsl:when>
-                <xsl:when test="$level = 12">4.4in</xsl:when>
-                <xsl:when test="../c">0in</xsl:when>
-                <xsl:when test="../c01">.4in</xsl:when>
-                <xsl:when test="../c02">.8in</xsl:when>
-                <xsl:when test="../c03">1.2in</xsl:when>
-                <xsl:when test="../c04">1.6in</xsl:when>
-                <xsl:when test="../c05">2in</xsl:when>
-                <xsl:when test="../c06">2.4in</xsl:when>
-                <xsl:when test="../c07">2.8in</xsl:when>
-                <xsl:when test="../c08">3.2in</xsl:when>
-                <xsl:when test="../c08">3.6in</xsl:when>
-                <xsl:when test="../c08">4in</xsl:when>
-                <xsl:when test="../c08">4.4in</xsl:when>
+                <xsl:when test="$level = 01">1%</xsl:when>
+                <xsl:when test="$level = 02">2%</xsl:when>
+                <xsl:when test="$level = 03">3%</xsl:when>
+                <xsl:when test="$level = 04">4%</xsl:when>
+                <xsl:when test="$level = 05">5%</xsl:when>
+                <xsl:when test="$level = 06">6%</xsl:when>
+                <xsl:when test="$level = 07">7%</xsl:when>
+                <xsl:when test="$level = 08">8%</xsl:when>
+                <xsl:when test="$level = 09">9%</xsl:when>
+                <xsl:when test="$level = 10">10%</xsl:when>
+                <xsl:when test="$level = 11">11%</xsl:when>
+                <xsl:when test="$level = 12">12%</xsl:when>
+                <xsl:when test="../c">1%</xsl:when>
+                <xsl:when test="../c01">2%</xsl:when>
+                <xsl:when test="../c02">3%</xsl:when>
+                <xsl:when test="../c03">4%</xsl:when>
+                <xsl:when test="../c04">5%</xsl:when>
+                <xsl:when test="../c05">6%</xsl:when>
+                <xsl:when test="../c06">7%</xsl:when>
+                <xsl:when test="../c07">8%</xsl:when>
+                <xsl:when test="../c08">9%</xsl:when>
+                <xsl:when test="../c08">10%</xsl:when>
+                <xsl:when test="../c08">11%</xsl:when>
+                <xsl:when test="../c08">12%</xsl:when>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="clevelFont">
@@ -2462,7 +2462,7 @@
                             <fo:block margin-left="{$clevelMargin}">
                             <fo:block><xsl:apply-templates select="ead:did" mode="dsc"/></fo:block>
                             <!-- 9/8/11 WS for RA: Added internal table for instances -->
-                                <xsl:if test="ead:did/ead:container or ead:scopecontent or ead:controlaccess
+                                <xsl:if test="ead:scopecontent or ead:controlaccess
                                     or ead:accruals or ead:appraisal or ead:arrangement or ead:bioghist
                                     or ead:accessrestrict[not(child::ead:legalstatus)] or ead:userestrict
                                     or ead:custodhist or ead:altformavail or ead:originalsloc 
@@ -2484,25 +2484,7 @@
                                                 </fo:table-cell>
                                             </fo:table-row>
                                         </xsl:if> -->
-                                        <xsl:for-each select="ead:did/ead:container[@id]">
-                                            <xsl:sort select="@label"/>
-                                            <xsl:variable name="id" select="@id"/>
-                                            <fo:table-row margin-top="2pt">
-                                                <fo:table-cell margin-left=".4in">
-                                                  <fo:block>
-                                                  <xsl:value-of select="@label"/>
-                                                  </fo:block>
-                                                </fo:table-cell>
-                                                <fo:table-cell>
-                                                  <fo:block>
-                                                  <xsl:value-of select="concat(@type,' ',.)"/>
-                                                  <xsl:if test="../ead:container[@parent = $id]">
-                                                  <xsl:value-of select="concat(' / ',../ead:container[@parent = $id]/@type,' ',../ead:container[@parent = $id])"/>
-                                                  </xsl:if>
-                                                  </fo:block>
-                                                </fo:table-cell>
-                                            </fo:table-row>
-                                        </xsl:for-each>
+                                        
                                         <!-- Uncomment for digital object display
                                         <xsl:if test="descendant-or-self::ead:dao">
                                             <xsl:for-each select="descendant-or-self::ead:dao">
@@ -2709,14 +2691,41 @@
             </xsl:when>
             <!--This code process the elements when unitdate is not a child of untititle-->
             <xsl:otherwise>
+                <fo:table>
+                    <fo:table-column column-width="60%"/>
+                    <fo:table-column column-width="30%"/>
+                    <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell>
                 <fo:block font-weight="bold">
-                <xsl:apply-templates select="ead:unittitle"/>
-                <xsl:if test="ead:unitdate and ead:unittitle and string-length(ead:unittitle) &gt; 1">, </xsl:if>
-                <xsl:for-each select="ead:unitdate[not(self::ead:unitdate[@type='bulk'])]">
-                    <xsl:apply-templates/>
-                    <xsl:text>&#160;</xsl:text>
-                </xsl:for-each>
+                    <xsl:apply-templates select="ead:unittitle"/>
+                    <xsl:if test="ead:unitdate and ead:unittitle and string-length(ead:unittitle) &gt; 1">, </xsl:if>
+                    <xsl:for-each select="ead:unitdate[not(self::ead:unitdate[@type='bulk'])]">
+                        <xsl:apply-templates/>
+                        <xsl:text>&#160;</xsl:text>
+                    </xsl:for-each>
                 </fo:block>
+                </fo:table-cell>
+                <fo:table-cell>
+                    <fo:block>
+                        <xsl:for-each select="ead:container[@id]">
+                            <xsl:sort select="@label"/>
+                            <xsl:variable name="id" select="@id"/>
+                            <fo:block><xsl:value-of select="concat(@type,' ',.)"/>
+                                    <xsl:if test="../ead:container[@parent = $id]">
+                                        <xsl:value-of select="concat(', ',../ead:container[@parent = $id]/@type,' ',../ead:container[@parent = $id])"/>
+                                    </xsl:if>
+                                    <xsl:if test="@label != 'Mixed materials' | 'mixed materials' | 'Mixed Materials'">
+                                        <xsl:text>(</xsl:text>
+                                        <xsl:value-of select="@label"/>
+                                        <xsl:text>)</xsl:text>
+                                    </xsl:if></fo:block>
+                        </xsl:for-each>
+                    </fo:block>
+                </fo:table-cell>
+                    </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="ead:physdesc/ead:extent">
