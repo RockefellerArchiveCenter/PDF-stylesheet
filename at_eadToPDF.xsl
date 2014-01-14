@@ -24,7 +24,7 @@
     -->
     <xsl:output method="xml" encoding="utf-8" indent="yes"/>
     <xsl:strip-space elements="*"/>
-<!--    <xsl:include href="lookupListsPDF.xsl"/>-->
+<!--   <xsl:include href="lookupListsPDF.xsl"/>-->
     <xsl:include href="reports/Resources/eadToPdf/lookupListsPDF.xsl"/>
     <!-- 9/19/11 WS for RA: Caculates current date -->   
     <xsl:variable name="tmp" select="cal:new()"/>
@@ -1425,13 +1425,13 @@
                 </fo:basic-link>
                 <xsl:if test="following-sibling::ead:extref">, </xsl:if>
             </xsl:when>
-            <xsl:when test="@ns2:href">
+            <!--<xsl:when test="@ns2:href">
                 <fo:basic-link external-destination="{@ns2:href}" text-decoration="underline"
                     color="blue">
                     <xsl:value-of select="."/>
                 </fo:basic-link>
                 <xsl:if test="following-sibling::ead:extref">, </xsl:if>
-            </xsl:when>
+            </xsl:when>-->
             <xsl:otherwise>
                 <xsl:apply-templates/>
             </xsl:otherwise>
@@ -1608,6 +1608,7 @@
         <xsl:choose>
             <xsl:when test="ancestor-or-self::ead:dsc">
                 <fo:block margin-bottom="4pt">
+                    <xsl:call-template match="ead:p"></xsl:call-template>
                     <xsl:apply-templates/>
                 </fo:block>
             </xsl:when>
