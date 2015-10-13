@@ -25,7 +25,7 @@
     <xsl:output method="xml" encoding="utf-8" indent="yes"/>
     <xsl:strip-space elements="*"/>
 <!--   <xsl:include href="lookupListsPDF.xsl"/>-->
-    <xsl:include href="reports/Resources/eadToPdf/lookupListsPDF.xsl"/>
+    <xsl:include href="lookupListsPDF.xsl"/>
     <!-- 9/19/11 WS for RA: Caculates current date -->   
     <xsl:variable name="tmp" select="cal:new()"/>
     <xsl:variable name="year" select="cal:get($tmp, 1)"/>
@@ -270,7 +270,7 @@
             
             <!-- 8/10/11 WS: Added Rockefeller Logo -->
             <fo:block space-before="75pt">
-                <fo:external-graphic src="reports/Resources/eadToPdf/RAClogo.jpg" content-height="200%" content-width="200%"/>
+                <fo:external-graphic src="RAClogo.jpg" content-height="200%" content-width="200%"/>
                 <fo:block font-size="11pt"> &#169; Rockefeller Archive Center,
                     <xsl:choose>
                         <xsl:when test="ead:filedesc/ead:publicationstmt/ead:date">
